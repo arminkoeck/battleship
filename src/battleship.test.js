@@ -2,19 +2,13 @@ import { createShip } from "./ships.js";
 import { createGameboard } from "./gameboard.js";
 
 describe("Ships", () => {
-  test("not sunk before enough hits", () => {
-    let first = createShip(3);
-    first.hit();
-    first.hit();
-    expect(first.isSunk()).toBe(false);
-  });
-
-  test("sunk when enough hits", () => {
-    let first = createShip(3);
-    first.hit();
-    first.hit();
-    first.hit();
-    expect(first.isSunk()).toBe(true);
+  test("ship is only sunk when enough hits", () => {
+    let ship = createShip(3);
+    ship.hit();
+    ship.hit();
+    expect(ship.isSunk()).toBe(false);
+    ship.hit();
+    expect(ship.isSunk()).toBe(true);
   });
 });
 
@@ -45,7 +39,7 @@ describe("Gameboard", () => {
     gameboard.placeShip([0, 9], 2, "y");
     const ships = gameboard.listShips();
     expect(ships).toEqual([]);
-  })
+  });
 
 
   // test("attack misses shot", () => {
