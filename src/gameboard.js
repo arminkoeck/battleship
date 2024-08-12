@@ -6,17 +6,18 @@ export function createGameboard() {
   console.log(board);
   let ships = [];
 
+  function getBoardSize () {
+    return boardSize;
+  }
+
   function placeShip(location, length, direction) {
     let shipFields = [location];
-
     if (direction === "x" && ((location[0] + (length - 1)) > boardSize)) {
       return
     }
-
     if (direction === "y" && (location[1] + (length - 1)) > boardSize) {
       return
     }
-
     for (let i = 0; i < (length - 1); i++) {
       if (direction === "x") {
         let nextField = [shipFields[i][0] + 1, shipFields[i][1]];
@@ -33,7 +34,11 @@ export function createGameboard() {
     return ships;
   }
 
-  return { placeShip, listShips };
+  function receiveAttack (field) {
+    ships[0].ship.hit();
+  }
+
+  return { placeShip, listShips, receiveAttack, getBoardSize };
 }
 
 function createFields(boardSize) {

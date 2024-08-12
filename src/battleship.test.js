@@ -35,11 +35,13 @@ describe("Gameboard", () => {
 
   test("ships cant be placed outside of board", () => {
     const gameboard = createGameboard();
-    gameboard.placeShip([9, 0], 2, "x");
-    gameboard.placeShip([0, 9], 2, "y");
+    let maxSize = gameboard.getBoardSize();
+    gameboard.placeShip([maxSize, 0], 2, "x");
+    gameboard.placeShip([0, maxSize], 2, "y");
     const ships = gameboard.listShips();
     expect(ships).toEqual([]);
   });
+
 
 
   // test("attack misses shot", () => {
